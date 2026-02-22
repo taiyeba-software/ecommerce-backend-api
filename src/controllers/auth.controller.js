@@ -34,6 +34,8 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
+    console.log("LOGIN BODY:", req.body);
+    
     const { email, password } = req.body;
 
     // Find user by email
@@ -77,7 +79,7 @@ const login = async (req, res) => {
 
     res.status(200).json({ user: userResponse });
   } catch (error) {
-    console.error('Login error:', error);
+    console.error("🔥 LOGIN ERROR:", error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };
