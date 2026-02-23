@@ -157,37 +157,52 @@ IMAGEKIT_URL_ENDPOINT=your_endpoint
 - `IMAGEKIT_PRIVATE_KEY`: Private key for ImageKit
 - `IMAGEKIT_URL_ENDPOINT`: ImageKit URL endpoint for image access
 
-## 🚀 Local Development Setup
+## � Local Development Setup
 
-### Prerequisites
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/taiyeba-software/Backend-Rajkonna
+cd Backend-Rajkonna
+```
 
-- Node.js (v14 or higher)
-- MongoDB (local or cloud instance)
-- Redis (local or cloud instance)
+### 2️⃣ Install Dependencies (Clean Install Recommended)
+For a clean and consistent installation:
+```bash
+npm ci
+```
 
-### Installation
+If `package-lock.json` is not present:
+```bash
+npm install
+```
 
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd rajkonna-backend
-   ```
+### 3️⃣ Install Development Dependencies
+Install nodemon for development:
+```bash
+npm install --save-dev nodemon
+```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+### 4️⃣ Configure Environment Variables
+Create a `.env` file in the root directory:
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+REDIS_URL=your_redis_url
+IMAGEKIT_PUBLIC_KEY=your_key
+IMAGEKIT_PRIVATE_KEY=your_key
+IMAGEKIT_URL_ENDPOINT=your_endpoint
+```
 
-3. Set up environment variables:
-   - Copy `.env.example` to `.env`
-   - Fill in the required values (see Environment Variables section above)
+### 5️⃣ Run the Development Server
+```bash
+npm run dev
+```
 
-4. Start the server:
-   ```bash
-   npx nodemon server.js
-   ```
-
-   The server will run on `http://localhost:5000` (or the port specified in your `.env` file).
+Server will start at:
+```
+http://localhost:5000
+```
 
 ## 🧪 Testing
 
