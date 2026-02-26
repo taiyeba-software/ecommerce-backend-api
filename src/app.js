@@ -17,7 +17,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:4173",
-      "https://your-frontend-domain.vercel.app",
+      "https://frontend-rajkonna.vercel.app",
     ],
     credentials: true,
   })
