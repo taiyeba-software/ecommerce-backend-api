@@ -11,9 +11,7 @@ const orderRoutes = require("./routes/order.routes");
 
 const app = express();
 
-app.use(express.json());
-app.use(cookieParser());
-
+// 🔥 CORS FIRST
 app.use(
   cors({
     origin: [
@@ -25,7 +23,14 @@ app.use(
   })
 );
 
+// ✅ Explicitly handle preflight
+app.options("*", cors());
 
+// Then other middleware
+app.use(express.json());
+app.use(cookieParser());
+
+// Then routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
