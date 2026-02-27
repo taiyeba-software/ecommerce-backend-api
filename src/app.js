@@ -1,5 +1,4 @@
 
-
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -14,11 +13,7 @@ const app = express();
 // 🔥 CORS FIRST
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:4173",
-      "https://frontend-rajkonna.vercel.app",
-    ],
+    origin: true,
     credentials: true,
   })
 );
