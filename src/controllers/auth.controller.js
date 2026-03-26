@@ -22,6 +22,7 @@ const register = async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      role: user.role,
       createdAt: user.createdAt,
     };
 
@@ -75,6 +76,7 @@ const login = async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      role: user.role,
     };
 
     res.status(200).json({ user: userResponse });

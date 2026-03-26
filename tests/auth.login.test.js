@@ -33,6 +33,7 @@ describe('POST /api/auth/login', () => {
     expect(response.body.user).toHaveProperty('_id');
     expect(response.body.user).toHaveProperty('name', 'Test User');
     expect(response.body.user).toHaveProperty('email', 'test@example.com');
+    expect(response.body.user).toHaveProperty('role', 'user');
     expect(response.body.user).not.toHaveProperty('password');
 
     // Check if token cookie is set
@@ -46,6 +47,7 @@ describe('POST /api/auth/login', () => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback_secret');
     expect(decoded).toHaveProperty('userId', user._id.toString());
     expect(decoded).toHaveProperty('email', 'test@example.com');
+    expect(decoded).toHaveProperty('role', 'user');
   });
 
   it('should return 400 for invalid credentials (wrong email)', async () => {

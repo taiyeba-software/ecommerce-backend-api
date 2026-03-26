@@ -18,9 +18,6 @@ app.use(
   })
 );
 
-// ✅ Explicitly handle preflight
-app.options("*", cors());
-
 // Then other middleware
 app.use(express.json());
 app.use(cookieParser());

@@ -16,7 +16,7 @@ const getProfile = async (req, res) => {
       userId = requestedUserId;
     }
 
-    const user = await User.findById(userId).select('name email phone address').lean();
+    const user = await User.findById(userId).select('name email role phone address').lean();
     if (!user) return res.status(404).json({ message: 'User not found' });
 
     return res.status(200).json({ user });
@@ -45,7 +45,7 @@ const updateProfile = async (req, res) => {
       };
     }
 
-    const updated = await User.findByIdAndUpdate(userId, { $set: updates }, { new: true, runValidators: true }).select('name email phone address').lean();
+    const updated = await User.findByIdAndUpdate(userId, { $set: updates }, { new: true, runValidators: true }).select('name email role phone address').lean();
     if (!updated) return res.status(404).json({ message: 'User not found' });
 
     return res.status(200).json({ user: updated });

@@ -27,6 +27,7 @@ describe('Profile endpoints', () => {
     expect(res.body).toHaveProperty('user');
     expect(res.body.user).toHaveProperty('name', 'Profile User');
     expect(res.body.user).toHaveProperty('email', 'profile@example.com');
+    expect(res.body.user).toHaveProperty('role', 'user');
     expect(res.body.user).toHaveProperty('phone', '');
     expect(res.body.user).toHaveProperty('address');
     expect(res.body.user.address).toEqual({
