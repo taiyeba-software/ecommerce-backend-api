@@ -3,16 +3,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const redisService = require('../services/redis.service');
 
-const buildCookieOptions = () => {
-  const hasCrossSiteClient = Boolean(process.env.CLIENT_URL);
-  const isProduction = process.env.NODE_ENV === 'production';
-  const shouldUseCrossSiteCookie = isProduction || hasCrossSiteClient;
-
-  return {
-    httpOnly: true,
-    secure: shouldUseCrossSiteCookie,
-    sameSite: shouldUseCrossSiteCookie ? 'none' : 'lax',
-  };
+const cookieOptions = {
+  httpOnly: true,
+  secure: true,
+  sameSite: 'none',
 };
 
 const register = async (req, res) => {
@@ -72,7 +66,7 @@ const login = async (req, res) => {
 
     // Set token in HTTP-only cookie
     res.cookie('token', token, {
-      ...buildCookieOptions(),
+      ...cookieOptions,
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
@@ -103,7 +97,7 @@ const logout = async (req, res) => {
     await redisService.blacklistToken(token);
 
     // Clear the cookie
-    res.clearCookie('token', buildCookieOptions());
+    res.clearCookie('token', cookieOptions);
 
     res.status(200).json({ message: 'Logged out successfully' });
   } catch (error) {
