@@ -10,10 +10,26 @@ const orderRoutes = require("./routes/order.routes");
 
 const app = express();
 
+app.set("trust proxy", 1);
+
+const defaultAllowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://frontend-rajkonna.vercel.app",
+];
+
+const allowedOrigins = process.env.CLIENT_URL
+  ? [process.env.CLIENT_URL, ...defaultAllowedOrigins]
+  : defaultAllowedOrigins;
+
 // 🔥 CORS FIRST
 app.use(
   cors({
-    origin: true,
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
