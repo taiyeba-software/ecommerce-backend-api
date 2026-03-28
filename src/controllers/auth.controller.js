@@ -96,8 +96,12 @@ const logout = async (req, res) => {
     // Blacklist the token in Redis
     await redisService.blacklistToken(token);
 
-    // Clear the cookie
-    res.clearCookie('token', cookieOptions);
+    // Clear cookie with explicit options to match the login cookie attributes.
+    res.clearCookie('token', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+    });
 
     res.status(200).json({ message: 'Logged out successfully' });
   } catch (error) {
